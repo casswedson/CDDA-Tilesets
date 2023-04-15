@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     outputs:
-      timestamp: ${{ steps.get-timestamp.outputs.time }}
+      timestamp: ${{ steps.timestamp.outputs.time }}
     steps:
       - name: Get build timestamp
         id: timestamp
