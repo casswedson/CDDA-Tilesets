@@ -10,11 +10,11 @@ on:
   workflow_dispatch:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
+    permissions: write-all
     outputs:
       timestamp: ${{ steps.get-timestamp.outputs.time }}
     steps:
@@ -93,6 +93,7 @@ jobs:
             compose_args: --use-all
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Install Dependencies
         uses: awalsh128/cache-apt-pkgs-action@v1
