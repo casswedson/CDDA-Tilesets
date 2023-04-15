@@ -10,6 +10,7 @@ on:
   workflow_dispatch:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   release:
     name: Create Release
@@ -29,9 +30,7 @@ jobs:
           echo "RELEASE-TITLE=Tilesets Release ${{ steps.timestamp.outputs.time }}" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v3
       - run: |
-          gh release create "${{ steps.rel-data.outputs.TAG-NAME }}" --title "${{ steps.rel-data.outputs.RELEASE-TITLE }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          gh release create "${{ steps.rel-data.outputs.TAG-NAME }}" --generate-notes --title "${{ steps.rel-data.outputs.RELEASE-TITLE }}"
 
   builds:
     needs: release
@@ -123,5 +122,3 @@ jobs:
 
           zip -r $release_name.zip $release_name
           gh release upload ${{ needs.release.outputs.timestamp }} $release_name
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
