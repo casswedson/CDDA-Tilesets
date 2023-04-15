@@ -121,4 +121,4 @@ jobs:
           [ -f "${{ matrix.tileset_dir }}/layering.json" ] && mv "${{ matrix.tileset_dir }}/layering.json" $release_name
 
           zip -r $release_name.zip $release_name
-          gh release upload ${{ needs.release.outputs.timestamp }} $release_name
+          gh release upload ${{ needs.release.outputs.timestamp }} $release_name.zip
